@@ -30,13 +30,12 @@ class _AlarmPlayScreenState extends State<AlarmPlayScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    AlarmStatusModel alarmStatusModel = context.read<AlarmStatusModel>();
+    AlarmStatusModel alarmStatusModel = context.watch<AlarmStatusModel>();
 
     ZeroBaseModel zeroBaseModel = context.read<ZeroBaseModel>();
 
@@ -83,7 +82,10 @@ class _AlarmPlayScreenState extends State<AlarmPlayScreen> {
       alarmStatusModel.setAlarmStatus();
       alarmStatusModel.setStartableStatus();
 
-      Navigator.pop(context);
+      // SharedPreferencesManager.instance
+      //     .setAlarmStartable(alarmStatusModel.startable);
+
+      Navigator.popUntil(context, (Route route) => route.isFirst);
     }
 
     void alertDialog() {
@@ -140,7 +142,7 @@ class _AlarmPlayScreenState extends State<AlarmPlayScreen> {
                         child: Column(
                           children: [
                             const Text(
-                              "영충 누적 시간",
+                              "ZeroBug 누적 시간",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -151,8 +153,9 @@ class _AlarmPlayScreenState extends State<AlarmPlayScreen> {
                               builder: (context) {
                                 DateTime now = DateTime.now();
                                 Duration cummulative = now.difference(
-                                    zeroBaseModel
-                                        .scheduledNotificationDateTime);
+                                        zeroBaseModel
+                                            .scheduledNotificationDateTime) +
+                                    zeroBaseModel.currentCumulativeTime;
                                 return Text(
                                   FormatTime.formatDurationToColon(cummulative),
                                   style: const TextStyle(
@@ -172,13 +175,6 @@ class _AlarmPlayScreenState extends State<AlarmPlayScreen> {
                     ],
                   ),
                 ),
-                const Text(
-                  "tests",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                  ),
-                )
               ],
             ),
           ),

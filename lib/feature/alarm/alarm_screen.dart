@@ -71,7 +71,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
         onTap: onScaffoldTap,
         onHorizontalDragEnd: (details) {
           // 수직 드래그 감지: 사용자가 위에서 아래로 드래그할 때
-          if (details.primaryVelocity! < -5000) {
+          if (details.primaryVelocity! < -1200) {
             // 드래그 거리가 일정 기준을 초과하면 Bottom Sheet를 띄웁니다.
             _showBottomSheet(
               context,

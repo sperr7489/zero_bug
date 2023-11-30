@@ -1,4 +1,4 @@
-package com.example.Zero_Bug
+package com.alarm.Zero_Bug
 
 import io.flutter.embedding.android.FlutterActivity
 

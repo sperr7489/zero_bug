@@ -86,9 +86,9 @@ class AudioPlayerHandler extends BaseAudioHandler {
   Future<void> stop() async {
     // Release any audio decoders back to the system
     await _player.stop().then(
-          (value) => _player.seek(
-            Duration.zero,
-          ),
+          (value) => (value) => _player.seek(
+                Duration.zero,
+              ),
         );
 
     // Set the audio_service state to `idle` to deactivate the notification.

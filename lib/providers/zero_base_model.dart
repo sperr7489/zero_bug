@@ -6,11 +6,15 @@ class ZeroBaseModel with ChangeNotifier {
   DateTime _lastDate = DateTime.now();
   double _cumulativeTime = 0;
 
+  //_scheduledNotificationDateTime이 설정된 시간과 _scheduledNotificationDateTime의 차이 Duration
+  Duration _currentCumulativeTime = const Duration(seconds: 0); //
+
   int get zeroBase => _zeroBase;
   DateTime get scheduledNotificationDateTime =>
       _scheduledNotificationDateTime ?? DateTime.now();
   DateTime get lastDate => _lastDate;
   double get cumulativeTime => _cumulativeTime;
+  Duration get currentCumulativeTime => _currentCumulativeTime;
 
   // zerobase에 대한 값을 수정하는 것.
   set setZeroBase(int value) {
@@ -52,6 +56,8 @@ class ZeroBaseModel with ChangeNotifier {
         DateTime(now.year, now.month, now.day, now.hour, now.minute, 0, 0)
             .add(Duration(minutes: addMin));
     _scheduledNotificationDateTime = alarmTime;
+
+    _currentCumulativeTime = _scheduledNotificationDateTime!.difference(now);
 
     notifyListeners();
   }

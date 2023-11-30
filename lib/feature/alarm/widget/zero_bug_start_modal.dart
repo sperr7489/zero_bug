@@ -50,6 +50,8 @@ class _ZeroBugStartModalState extends State<ZeroBugStartModal> {
       LocalNotification.scheduleAlarm(alarmedTime, setAlarmStatus);
       alarmStatus.setStartableStatus();
 
+      // SharedPreferencesManager.instance.setAlarmStartable(alarmStatus.startable);
+
       // start 버튼을 눌렀을 때 현재 알람을 등록한 시간을 등록한다.
       memoModel.setCreatedAt = now;
       Navigator.pop(context);

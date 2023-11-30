@@ -22,6 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     SharedPreferencesManager.instance.getOnBoardingValid().then((value) {
+      SharedPreferencesManager.instance.setInitialAlarmStatus();
+
+      // print(SharedPreferencesManager.instance.getNotNormalExit());
+
       setState(() {
         _onBoardingValid = value;
       });

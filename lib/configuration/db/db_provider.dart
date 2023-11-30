@@ -20,7 +20,6 @@ class DatabaseProvider {
 
   Future<Database> _initDB() async {
     String dbPath = await getDatabasesPath();
-    print(dbPath);
     String path = join(dbPath, 'zero_bug.db');
     return await openDatabase(
       path,

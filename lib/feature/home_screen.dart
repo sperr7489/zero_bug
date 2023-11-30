@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
@@ -34,8 +34,43 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    // 현재 알람 상태에 대한 초깃값을 로컬 저장소에서 가져오도록 한다.
     super.initState();
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
+  }
+
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   // TODO: implement didChangeAppLifecycleState
+  //   super.didChangeAppLifecycleState(state);
+  //   switch (state) {
+  //     case AppLifecycleState.resumed:
+  //       print('resumed');
+  //       break;
+  //     case AppLifecycleState.inactive:
+  //       print('inactive');
+  //       break;
+  //     case AppLifecycleState.detached:
+  //       print('detached');
+  //       SharedPreferencesManager.instance.setNotNormalExit();
+  //       // DO SOMETHING!
+  //       break;
+  //     case AppLifecycleState.paused:
+  //       print('paused');
+  //       break;
+  //     default:
+  //       print("넌 뭐지?");
+  //       break;
+  //   }
+  // }
 
   void navigateToAudioScreen(AlarmStatusModel alarmStatusModel) {
     Navigator.push(
@@ -73,6 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (alarmStatusModel.alarmStatus) {
+        print(alarmStatusModel.alarmStatus);
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => MultiProvider(
             providers: [

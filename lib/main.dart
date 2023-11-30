@@ -22,6 +22,7 @@ Future<void> main() async {
   LocalNotification.initialize();
 
   LocalNotification.requestPermission();
+
   runApp(
     const MyApp(),
   );

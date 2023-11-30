@@ -21,7 +21,6 @@ class Spinner extends StatelessWidget {
       pageColors: [Colors.black, const Color.fromARGB(255, 27, 21, 21)],
     );
 
-    // print('${spinnerCustom.value} 를 확인');
     return IgnorePointer(
       ignoring: true,
       child: SafeArea(

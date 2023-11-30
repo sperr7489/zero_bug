@@ -61,7 +61,8 @@ class LocalNotification {
       'alarm_notif',
       channelDescription: 'Channel for Alarm notification',
       icon: '@mipmap/ic_launcher',
-      importance: Importance.high,
+      importance: Importance.max,
+      priority: Priority.max,
     );
 
     DarwinNotificationDetails darwinNotificationDetails =
@@ -124,7 +125,7 @@ class LocalNotification {
           0,
           'Zero Bug Stop',
           '다시 집중할 시간입니다. ',
-          tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+          tz.TZDateTime.now(tz.local).add(const Duration(seconds: 7)),
           platformChannelSpecifics,
           payload: 'item x',
           uiLocalNotificationDateInterpretation:
@@ -139,5 +140,38 @@ class LocalNotification {
                 },
               )
             });
+  }
+
+  static detachedAppNotification() async {
+    AndroidNotificationDetails androidPlatformChannelSpecific =
+        const AndroidNotificationDetails(
+      'alarm_notif',
+      'alarm_notif',
+      channelDescription: 'Channel for Alarm notification',
+      icon: '@mipmap/ic_launcher',
+      importance: Importance.max,
+      priority: Priority.max,
+    );
+
+    DarwinNotificationDetails darwinNotificationDetails =
+        const DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    NotificationDetails notificationDetails = NotificationDetails(
+      android: androidPlatformChannelSpecific,
+      iOS: darwinNotificationDetails,
+    );
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      0, // 알림 ID
+      'Zero Bug가 강제 종료되었습니다. ',
+      '강제 종료될 시 알람이 울리지 않으니 다시 등록해주세요 ',
+      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)), // 예약할 시간
+      notificationDetails, // 알림 세부 설정
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
   }
 }
