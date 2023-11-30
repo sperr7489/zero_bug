@@ -60,5 +60,9 @@
 	<false/>
 	<key>kTCCServiceMediaLibrary</key>
 	<string>media</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We require access to your photo library to upload and manage your photos.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Our app may need to access the microphone in future for features like voice messages.</string>
 </dict>
 </plist>
