@@ -47,30 +47,29 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     super.dispose();
   }
 
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   // TODO: implement didChangeAppLifecycleState
-  //   super.didChangeAppLifecycleState(state);
-  //   switch (state) {
-  //     case AppLifecycleState.resumed:
-  //       print('resumed');
-  //       break;
-  //     case AppLifecycleState.inactive:
-  //       print('inactive');
-  //       break;
-  //     case AppLifecycleState.detached:
-  //       print('detached');
-  //       SharedPreferencesManager.instance.setNotNormalExit();
-  //       // DO SOMETHING!
-  //       break;
-  //     case AppLifecycleState.paused:
-  //       print('paused');
-  //       break;
-  //     default:
-  //       print("넌 뭐지?");
-  //       break;
-  //   }
-  // }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.resumed:
+        print('resumed');
+        break;
+      case AppLifecycleState.inactive:
+        print('inactive');
+        break;
+      case AppLifecycleState.detached:
+        print('detached');
+        // DO SOMETHING!
+        break;
+      case AppLifecycleState.paused:
+        print('paused');
+        break;
+      default:
+        print("넌 뭐지?");
+        break;
+    }
+  }
 
   void navigateToAudioScreen(AlarmStatusModel alarmStatusModel) {
     Navigator.push(
